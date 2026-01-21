@@ -18,8 +18,11 @@ app.get("/", (req, res) => {
 app.get("/:id",(req,res) =>{
     const {id} = req.params;
     const estudante = estudantes.find(e => e.id === id)
-    res.json(estudante)
-
+    if(!estudante){
+      res.status(404).json({ erro: "nao encontrado" });
+    }else{
+      res.json(estudante)
+    }
 })
 
 app.listen(port, () => {
